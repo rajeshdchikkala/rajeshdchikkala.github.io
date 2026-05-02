@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rajesh Chikkala — Cloud Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f5f2ec;
+    --accent: #c8410a;
+    --muted: #8a8580;
+    --border: #d4cfc7;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(245, 242, 236, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 70px;
+  }
+  .hero-left {
+    padding: 6rem 3rem 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--border);
+  }
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+  h1 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .hero-subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    max-width: 380px;
+    margin-top: 1.5rem;
+    line-height: 1.8;
+  }
+  .hero-ctas { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    padding: 0.75rem 1.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    border: 1px solid var(--ink);
+  }
+  .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 0.75rem 1.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--ink); }
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 3rem 4rem;
+  }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+  }
+  .stat-block {
+    padding: 2rem;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-block:nth-child(even) { border-right: none; }
+  .stat-block:nth-child(3), .stat-block:nth-child(4) { border-bottom: none; }
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2.8rem;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .stat-number span { color: var(--accent); }
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+  }
+  .hero-contact-bar {
+    margin-top: 2rem;
+    padding: 1.25rem;
+    background: #1a1a1a;
+    color: #a8ff78;
+    font-size: 0.72rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .hero-contact-bar a { color: #a8ff78; text-decoration: none; }
+  section { padding: 6rem 3rem; border-top: 1px solid var(--border); }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+  .section-num { font-size: 0.7rem; color: var(--accent); letter-spacing: 0.2em; }
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  h2 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .exp-grid { display: flex; flex-direction: column; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 0;
+    position: relative;
+    cursor: pointer;
+  }
+  .exp-item:last-child { border-bottom: 1px solid var(--border); }
+  .exp-meta { padding-right: 2rem; }
+  .exp-date { font-size: 0.7rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .exp-company { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; }
+  .exp-client { font-size: 0.7rem; color: var(--muted); margin-top: 0.25rem; }
+  .exp-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.15rem; margin-bottom: 0.75rem; }
+  .exp-desc { color: var(--muted); font-size: 0.8rem; line-height: 1.8; margin-bottom: 1rem; font-style: italic; }
+  .exp-bullets { list-style: none; display: none; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
+  .exp-item.open .exp-bullets { display: flex; }
+  .exp-bullets li { font-size: 0.78rem; color: var(--ink); padding-left: 1rem; position: relative; line-height: 1.7; }
+  .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; }
+  .exp-toggle {
+    position: absolute; right: 0; top: 2.5rem;
+    width: 28px; height: 28px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; color: var(--muted);
+    transition: all 0.2s;
+  }
+  .exp-item:hover .exp-toggle { border-color: var(--ink); color: var(--ink); }
+  .exp-item.open .exp-toggle { background: var(--ink); color: var(--paper); }
+  .skills-section { background: var(--ink); color: var(--paper); }
+  .skills-section h2 { color: var(--paper); }
+  .skill-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    background: #222;
+  }
+  .skill-category { background: var(--ink); padding: 2rem; }
+  .skill-cat-label {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.25rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    font-size: 0.7rem; padding: 0.3rem 0.7rem;
+    border: 1px solid #333; color: #aaa; transition: all 0.15s; cursor: default;
+  }
+  .skill-tag:hover { border-color: var(--accent); color: var(--paper); }
+  .cert-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+  .cert-card {
+    border: 1px solid var(--border); padding: 1.75rem;
+    transition: border-color 0.2s;
+  }
+  .cert-card:hover { border-color: var(--accent); }
+  .cert-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .cert-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; line-height: 1.3; margin-bottom: 0.25rem; }
+  .cert-issuer { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .impact-section { background: var(--accent); color: var(--paper); }
+  .impact-section h2 { color: var(--paper); }
+  .impact-section .section-num { color: rgba(255,255,255,0.6); }
+  .impact-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .impact-card { padding: 3rem 2rem; border-right: 1px solid rgba(255,255,255,0.2); }
+  .impact-card:last-child { border-right: none; }
+  .impact-num {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: 3.5rem; line-height: 1; margin-bottom: 0.75rem;
+  }
+  .impact-desc { font-size: 0.8rem; opacity: 0.85; line-height: 1.7; }
+  footer {
+    padding: 3rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; }
+  .footer-links { display: flex; gap: 2rem; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--ink); }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 5rem 1.5rem 2rem; border-right: none; }
+    .hero-right { padding: 2rem 1.5rem; }
+    section { padding: 4rem 1.5rem; }
+    .exp-item { grid-template-columns: 1fr; padding-right: 2.5rem; }
+    .exp-meta { margin-bottom: 1rem; }
+    .impact-grid { grid-template-columns: 1fr; }
+    .impact-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); }
+    footer { flex-direction: column; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">RC<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="mailto:rajeshd.chikkala@gmail.com">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero" style="border-top:none;">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Available for new opportunities</div>
+    <h1>Rajesh<br><em>Chikkala</em></h1>
+    <p style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--muted); margin-top:0.5rem;">Cloud Architect &amp; Lead Software Engineer</p>
+    <p class="hero-subtitle">16+ years designing enterprise-scale systems across financial services, real estate &amp; banking. AWS cloud-native specialist with a track record in AI automation, microservices modernization, and high-availability platforms.</p>
+    <div class="hero-ctas">
+      <a href="mailto:rajeshd.chikkala@gmail.com" class="btn-primary">Get in Touch</a>
+      <a href="https://linkedin.com/in/rajeshdchikkala" target="_blank" class="btn-secondary">LinkedIn ↗</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-grid">
+      <div class="stat-block">
+        <div class="stat-number">16<span>+</span></div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number">8<span>+</span></div>
+        <div class="stat-label">Enterprise Clients</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number">$60<span>k</span></div>
+        <div class="stat-label">Revenue Generated</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number">300<span>h</span></div>
+        <div class="stat-label">Ops Hours Saved</div>
+      </div>
+    </div>
+    <div class="hero-contact-bar">
+      <span>📍 New Hill, NC</span>
+      <span>✉ <a href="mailto:rajeshd.chikkala@gmail.com">rajeshd.chikkala@gmail.com</a></span>
+      <span>📞 (919) 396-1962</span>
+    </div>
+  </div>
+</div>
+
+<section class="impact-section" id="impact">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2>Measurable <em style="color:#ffb38a">Impact</em></h2>
+  </div>
+  <div class="impact-grid reveal">
+    <div class="impact-card">
+      <div class="impact-num">$20K</div>
+      <div class="impact-desc">Revenue generated in 3 months at Anywhere Real Estate through international and domestic project delivery</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num">300h</div>
+      <div class="impact-desc">~200h saved automating IBM MQ reporting + ~100h saved on CI/CD deployment automation at Accenture</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num">7×</div>
+      <div class="impact-desc">Faster access provisioning — role provisioning reduced from days to hours at Credit Suisse</div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2>Work <em>Experience</em></h2>
+  </div>
+  <div class="exp-grid">
+
+    <div class="exp-item" onclick="toggleExp(this)">
+      <div class="exp-meta">
+        <div class="exp-date">04/2025 – Present</div>
+        <div class="exp-company">Anywhere Real Estate</div>
+        <div class="exp-client">USA</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-title">Technical Lead / Cloud Architect</div>
+        <div class="exp-desc">Leading cloud architecture and full-stack delivery for enterprise document management and AI automation initiatives.</div>
+        <ul class="exp-bullets">
+          <li>Architected document storage workflows using AWS S3 with pre-signed URLs and Spring Boot microservices for ALN documents, stipulations, and claims</li>
+          <li>Designed DynamoDB tables for claims metadata with partition/sort key modeling for high-throughput querying and event-driven processing via DynamoDB Streams</li>
+          <li>Built AWS Lambda-based document processing pipeline triggered on S3 PutObject events, reducing manual processing overhead significantly</li>
+          <li>Designed Agentic AI PoC to automate generation of ALN documents and stipulations with task-oriented AI agents for data extraction and content assembly</li>
+          <li>Integrated Angular 14 and React Native into DFMS UI with modular component-based architecture across web and mobile surfaces</li>
+          <li>Generated $20,000 in revenue within 3 months; resolved Veracode SAST/SCA security issues across the codebase</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">+</div>
+    </div>
+
+    <div class="exp-item" onclick="toggleExp(this)">
+      <div class="exp-meta">
+        <div class="exp-date">02/2024 – 03/2025</div>
+        <div class="exp-company">TCS / Truist Bank</div>
+        <div class="exp-client">USA</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-title">Lead Software Engineer</div>
+        <div class="exp-desc">Led architecture and delivery for Dispute Resolution as a Service (DRaaS), integrating AI-enhanced workflows into banking claims systems.</div>
+        <ul class="exp-bullets">
+          <li>Designed solutions integrating DRaaS with Questionnaire system for seamless data flow across banking systems</li>
+          <li>Added AI-based logic to improve questionnaire flow and enable automated document categorization for claims retrieval</li>
+          <li>Built JSON-based Questionnaire API with Spring Cache for performance optimization and data reuse during claims creation</li>
+          <li>Maintained CI/CD pipelines across DEV, ITE, and PITE environments; designed automated case routing for dispute processing</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">+</div>
+    </div>
+
+    <div class="exp-item" onclick="toggleExp(this)">
+      <div class="exp-meta">
+        <div class="exp-date">10/2022 – 02/2024</div>
+        <div class="exp-company">Mastech / TIAA Bank</div>
+        <div class="exp-client">USA</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-title">Lead Software Engineer</div>
+        <div class="exp-desc">Led full-stack architecture and AI chatbot development for TIAA's offers and insurance claims platform.</div>
+        <ul class="exp-bullets">
+          <li>Implemented AWS S3 as centralized document repository, integrating with Spring Boot microservices and Outsystems</li>
+          <li>Designed and developed AI-powered conversational chatbots on Kore.ai platform with dialog tasks, knowledge graphs, and NLP training</li>
+          <li>Drove AWS cloud deployment via Docker containerization, ECS orchestration, and CloudWatch observability</li>
+          <li>Updated ReactJS 16 UI, integrated MongoDB, and managed Kafka REST API integrations for real-time processing</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">+</div>
+    </div>
+
+    <div class="exp-item" onclick="toggleExp(this)">
+      <div class="exp-meta">
+        <div class="exp-date">01/2022 – 10/2022</div>
+        <div class="exp-company">Mastech / Apple Inc</div>
+        <div class="exp-client">USA</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-title">Lead Software Engineer</div>
+        <div class="exp-desc">Architected a data science platform to collect, store, and analyze behavioral usage data from iPhone and iPad users at scale.</div>
+        <ul class="exp-bullets">
+          <li>Built secure data collection APIs in Java/Spring Boot receiving real-time usage telemetry from iOS devices at scale</li>
+          <li>Stored raw telemetry in Amazon S3 using structured data lake approach partitioned by device type, date, and event category</li>
+          <li>Used AWS Glue for ETL jobs; integrated Amazon Athena for serverless SQL querying against S3 datasets</li>
+          <li>Applied PII masking at ingestion layer for user privacy compliance; configured IAM roles with least-privilege access</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">+</div>
+    </div>
+
+    <div class="exp-item" onclick="toggleExp(this)">
+      <div class="exp-meta">
+        <div class="exp-date">03/2017 – 12/2021</div>
+        <div class="exp-company">Accenture / Credit Suisse</div>
+        <div class="exp-client">USA</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-title">Lead Software Engineer</div>
+        <div class="exp-desc">Led technical delivery and architecture for critical financial data systems in a heavily regulated enterprise environment.</div>
+        <ul class="exp-bullets">
+          <li>Implemented AD Serving data alert system recovery using microservices, Java, Spring Boot, and AWS S3 for millions of records</li>
+          <li>Led violation data recovery using microservices and Azure Event Hub for millions of records</li>
+          <li>Acted as SME for AWS S3 retention policies and ECR/ECS container orchestration</li>
+          <li>Enhanced Spark code for HIB/ASB data indexing; optimized Teradata procedures; migrated Spring 3 to Spring 5</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">+</div>
+    </div>
+
+    <div class="exp-item" onclick="toggleExp(this)">
+      <div class="exp-meta">
+        <div class="exp-date">11/2013 – 02/2017</div>
+        <div class="exp-company">Accenture / Credit Suisse</div>
+        <div class="exp-client">India</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-title">Software Engineer</div>
+        <div class="exp-desc">Contributed to investment banking platform engineering, building onboarding systems and automation tooling.</div>
+        <ul class="exp-bullets">
+          <li>Led team of 5 engineers developing onboarding system for 3,000+ organization accounts using GWT, Java, Spring, Oracle DB</li>
+          <li>Automated CI/CD pipeline using Git, Odyssey, Jenkins — saving ~100 hours of deployment time</li>
+          <li>Built automated IBM MQ message reader storing data to Oracle DB — saving ~200 hours in report creation</li>
+          <li>Developed role/permissions provisioning achieving 7x faster access; solved 500+ defects with 98% client satisfaction</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">+</div>
+    </div>
+
+    <div class="exp-item" onclick="toggleExp(this)">
+      <div class="exp-meta">
+        <div class="exp-date">07/2010 – 11/2013</div>
+        <div class="exp-company">Web Access Global</div>
+        <div class="exp-client">India</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-title">Software Engineer</div>
+        <div class="exp-desc">Built CIBIL credit reporting modules and global shipping systems, contributing directly to revenue growth.</div>
+        <ul class="exp-bullets">
+          <li>Designed CIBIL modules for TransUnion Score Reports using Java and Struts — increasing annual revenue by $40,000</li>
+          <li>Developed global shipping reports contributing to a $20,000 revenue increase through contract extensions</li>
+          <li>Migrated EJB web services to RESTful architecture; developed Spring Boot microservices with Docker</li>
+        </ul>
+      </div>
+      <div class="exp-toggle">+</div>
+    </div>
+
+  </div>
+</section>
+
+<section class="skills-section" id="skills">
+  <div class="section-header">
+    <span class="section-num" style="color:rgba(255,255,255,0.4)">03</span>
+    <h2>Technical <em style="color:#e8702a">Stack</em></h2>
+  </div>
+  <div class="skill-categories reveal">
+    <div class="skill-category">
+      <div class="skill-cat-label">Cloud &amp; Infrastructure</div>
+      <div class="skill-tags">
+        <span class="skill-tag">AWS EC2</span><span class="skill-tag">S3</span><span class="skill-tag">Lambda</span>
+        <span class="skill-tag">ECS</span><span class="skill-tag">EKS</span><span class="skill-tag">DynamoDB</span>
+        <span class="skill-tag">CloudWatch</span><span class="skill-tag">Secrets Manager</span>
+        <span class="skill-tag">S3 Glacier</span><span class="skill-tag">ECR</span>
+        <span class="skill-tag">Azure Event Hub</span><span class="skill-tag">GCP</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-label">Back-End</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Java</span><span class="skill-tag">Spring Boot</span>
+        <span class="skill-tag">Spring Cloud</span><span class="skill-tag">Microservices</span>
+        <span class="skill-tag">RESTful APIs</span><span class="skill-tag">Kafka</span>
+        <span class="skill-tag">Node.js</span><span class="skill-tag">JPA/Hibernate</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-label">Front-End</div>
+      <div class="skill-tags">
+        <span class="skill-tag">React</span><span class="skill-tag">React Native</span>
+        <span class="skill-tag">Angular 14</span><span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">JavaScript</span><span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-label">AI &amp; Data</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Agentic AI</span><span class="skill-tag">LLM Integration</span>
+        <span class="skill-tag">Kore.ai</span><span class="skill-tag">Apache Spark</span>
+        <span class="skill-tag">MongoDB</span><span class="skill-tag">DynamoDB Streams</span>
+        <span class="skill-tag">Athena</span><span class="skill-tag">AWS Glue</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-label">DevOps &amp; Databases</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Docker</span><span class="skill-tag">Kubernetes</span>
+        <span class="skill-tag">Jenkins</span><span class="skill-tag">GitHub Actions</span>
+        <span class="skill-tag">Splunk</span><span class="skill-tag">Veracode SAST</span>
+        <span class="skill-tag">MySQL</span><span class="skill-tag">Oracle</span><span class="skill-tag">Teradata</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-label">Leadership</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Architecture Review</span><span class="skill-tag">Team Lead</span>
+        <span class="skill-tag">Agile/Scrum</span><span class="skill-tag">BDD/TDD</span>
+        <span class="skill-tag">Stakeholder Mgmt</span><span class="skill-tag">Mentoring</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2>Certifi<em>cations</em></h2>
+  </div>
+  <div class="cert-list reveal">
+    <div class="cert-card">
+      <div class="cert-icon">☁️</div>
+      <div class="cert-name">Microsoft Azure Fundamentals</div>
+      <div class="cert-issuer">Microsoft — AZ-900</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🤖</div>
+      <div class="cert-name">OCI 2025 AI Foundations Associate</div>
+      <div class="cert-issuer">Oracle — 2025</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">💡</div>
+      <div class="cert-name">OCI Developer 2021 Associate</div>
+      <div class="cert-issuer">Oracle — 2021</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🧠</div>
+      <div class="cert-name">Generative AI Master Mind</div>
+      <div class="cert-issuer">AI Certification</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">⚡</div>
+      <div class="cert-name">Scrum Fundamentals Certified</div>
+      <div class="cert-issuer">SCRUMstudy — SFC</div>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 4rem 3rem; background: var(--ink); color: var(--paper); border-top: 1px solid #222;">
+  <div style="display:flex; align-items:center; gap:3rem; flex-wrap:wrap;">
+    <div>
+      <div style="font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:0.5rem;">Education</div>
+      <div style="font-family:'Syne',sans-serif; font-weight:800; font-size:1.3rem; letter-spacing:-0.02em;">B.Tech, Computer Engineering</div>
+      <div style="font-size:0.78rem; color:#888; margin-top:0.25rem;">K.C. College of Engineering, India — 2007</div>
+    </div>
+    <div style="flex:1; min-width:280px; text-align:right;">
+      <div style="font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:#555; margin-bottom:0.5rem;">Location</div>
+      <div style="font-family:'Syne',sans-serif; font-weight:700;">New Hill, NC</div>
+      <div style="font-size:0.75rem; color:#666;">Available for remote &amp; hybrid roles</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-name">Rajesh Chikkala<span style="color:var(--accent)">.</span></div>
+  <div class="footer-links">
+    <a href="mailto:rajeshd.chikkala@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/rajeshdchikkala" target="_blank">LinkedIn</a>
+    <a href="tel:9193961962">Phone</a>
+  </div>
+</footer>
+
+<script>
+  function toggleExp(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.exp-item').forEach(e => {
+      e.classList.remove('open');
+      e.querySelector('.exp-toggle').textContent = '+';
+    });
+    if (!isOpen) {
+      el.classList.add('open');
+      el.querySelector('.exp-toggle').textContent = '−';
+    }
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
